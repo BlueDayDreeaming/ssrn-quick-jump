@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "SSRN Quick Jump",
+  "version": "0.1.0",
+  "description": "Add SSRN links next to article titles on any site.",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://papers.ssrn.com/sol3/results.cfm*",
+        "https://ssrn.com/sol3/results.cfm*"
+      ],
+      "js": [
+        "ssrn-redirect.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/ssrn.svg"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "action": {
+    "default_title": "SSRN Jump",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/ssrn-16.png",
+      "32": "icons/ssrn-32.png",
+      "48": "icons/ssrn-48.png",
+      "128": "icons/ssrn-128.png"
+    }
+  }
+}
