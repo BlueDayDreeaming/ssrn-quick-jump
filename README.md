@@ -12,6 +12,12 @@
 
 ## 安装方式
 
+### 下载插件
+
+**方式1（推荐）**：从 [Releases](https://github.com/BlueDayDreeaming/ssrn-quick-jump/releases) 页面下载最新版本的 zip 文件，解压后直接使用
+
+**方式2**：点击 Code → Download ZIP 下载，解压后**进入内层文件夹**（包含 manifest.json 的那个文件夹）
+
 ### 步骤 1：打开 Chrome 扩展程序管理页面
 
 在 Chrome 浏览器中，点击右上角的"三个点"菜单，选择"扩展程序" → "管理扩展程序"，或直接访问 `chrome://extensions/`
@@ -32,18 +38,14 @@
 
 ### 步骤 4：选择插件文件夹
 
-从 GitHub 下载项目压缩包后，解压缩。**注意**：从 GitHub 下载的 zip 文件解压后，会有双层文件夹结构。
-
-第一次点击"加载已解压的扩展程序"，选择解压后的文件夹（如 `ssrn-quick-jump-main`），会提示"清单文件缺失或不可读取"。
-
-**这时需要再次点击"加载已解压的扩展程序"**，进入刚才的文件夹内部，选择里面真正包含以下文件的文件夹：
+选择解压后的文件夹。**正确的文件夹应该直接包含以下文件：**
 - manifest.json
-- content.js
+- content.js  
 - ssrn-redirect.js
 - icons 文件夹
-- 等其他文件
+- popup.html 等其他文件
 
-选择正确的文件夹后，插件就能成功加载了。
+⚠️ **如果提示"清单文件缺失或不可读取"**：说明选择的文件夹不对，需要进入内层文件夹（从 Code → Download ZIP 下载的需要进入 `ssrn-quick-jump-main` 文件夹）
 
 ## 功能特点
 

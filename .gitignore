@@ -1,0 +1,5 @@
+# Build Release Package
+build-release.ps1
+
+# Release packages
+ssrn-quick-jump-v*.zip
