@@ -21,9 +21,9 @@ const STOP_WORDS = new Set([
   "our",
   "their"
 ]);
-const MATCH_THRESHOLD = 0.62;
-const MAX_ATTEMPTS = 4;
-const RETRY_DELAY_MS = 400;
+const MATCH_THRESHOLD = 1.6;
+const MAX_ATTEMPTS = 6;
+const RETRY_DELAY_MS = 500;
 
 const targetTitle = resolveTargetTitle();
 if (targetTitle) {
@@ -31,10 +31,9 @@ if (targetTitle) {
 }
 
 function resolveTargetTitle() {
-  const params = new URLSearchParams(window.location.search);
-  const direct = params.get("ssrnTitle");
-  const fallback = params.get("txtKey_Words");
-  const resolved = direct || fallback || "";
+  const term = getSearchParam("term");
+  const fallback = getSearchParam("txtKey_Words");
+  const resolved = term || fallback || "";
   return String(resolved).replace(/\s+/g, " ").trim();
 }
 
@@ -42,10 +41,14 @@ function attemptRedirect(attempt) {
   const results = collectResults();
   if (results.length) {
     const best = pickBestMatch(results, targetTitle);
-    if (best && best.score >= MATCH_THRESHOLD) {
-      window.location.replace(best.url);
+    if (results.length === 1 && results[0].url) {
+      window.location.replace(results[0].url);
+      return;
     }
-    return;
+    if (best && best.score >= MATCH_THRESHOLD && best.coverage >= 0.8) {
+      window.location.replace(best.url);
+      return;
+    }
   }
 
   if (attempt < MAX_ATTEMPTS) {
@@ -93,14 +96,27 @@ function pickBestMatch(results, target) {
   }
 
   const targetTokens = tokenize(target);
+  const targetNormalized = normalizeText(target);
   let best = null;
   let bestScore = 0;
 
   results.forEach((result) => {
-    const score = jaccard(targetTokens, tokenize(result.title));
+    const resultTokens = tokenize(result.title);
+    const intersection = countIntersection(targetTokens, resultTokens);
+    const coverage = targetTokens.length ? intersection / targetTokens.length : 0;
+    const jaccardScore = jaccardFromIntersection(
+      intersection,
+      targetTokens.length,
+      resultTokens.length
+    );
+    const phraseHit =
+      targetNormalized && normalizeText(result.title).includes(targetNormalized)
+        ? 1
+        : 0;
+    const score = phraseHit * 1.5 + coverage + jaccardScore;
     if (score > bestScore) {
       bestScore = score;
-      best = { ...result, score };
+      best = { ...result, score, coverage };
     }
   });
 
@@ -120,21 +136,30 @@ function tokenize(text) {
     .filter((token) => token.length > 2 && !STOP_WORDS.has(token));
 }
 
-function jaccard(aTokens, bTokens) {
+function getSearchParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function countIntersection(aTokens, bTokens) {
   if (!aTokens.length || !bTokens.length) {
     return 0;
   }
-
   const aSet = new Set(aTokens);
   const bSet = new Set(bTokens);
   let intersection = 0;
-
   aSet.forEach((token) => {
     if (bSet.has(token)) {
       intersection += 1;
     }
   });
+  return intersection;
+}
 
-  const union = aSet.size + bSet.size - intersection;
+function jaccardFromIntersection(intersection, aSize, bSize) {
+  if (!intersection || !aSize || !bSize) {
+    return 0;
+  }
+  const union = aSize + bSize - intersection;
   return union === 0 ? 0 : intersection / union;
 }

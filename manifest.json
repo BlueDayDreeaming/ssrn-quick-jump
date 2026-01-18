@@ -20,6 +20,8 @@
     },
     {
       "matches": [
+        "https://papers.ssrn.com/searchresults.cfm*",
+        "https://ssrn.com/searchresults.cfm*",
         "https://papers.ssrn.com/sol3/results.cfm*",
         "https://ssrn.com/sol3/results.cfm*"
       ],

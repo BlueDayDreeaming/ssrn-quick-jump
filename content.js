@@ -191,8 +191,18 @@ function injectIcon(node) {
 }
 
 function buildSearchUrl(title) {
-  const query = encodeURIComponent(title);
-  return `https://papers.ssrn.com/sol3/results.cfm?txtKey_Words=${query}&ssrnTitle=${query}`;
+  const primaryQuery = buildSearchQuery(title);
+  const queryParam = encodeURIComponent(primaryQuery);
+  return `https://papers.ssrn.com/searchresults.cfm?term=${queryParam}`;
+}
+
+function buildSearchQuery(title) {
+  const trimmed = String(title || "").replace(/\s+/g, " ").trim();
+  const tokens = trimmed.split(" ").filter(Boolean);
+  if (!tokens.length) {
+    return "";
+  }
+  return tokens.join(" ");
 }
 
 function observeForChanges() {
