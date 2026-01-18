@@ -6,7 +6,7 @@ A Chrome browser extension that automatically adds SSRN links next to article ti
 
 ## Problem It Solves
 
-Top-tier journals in economics, finance, and accounting (such as AER, JF, TAR, etc.) typically require paid subscriptions to access. However, many universities (like yours) have limited budgets and haven't purchased access to these journals, creating significant barriers to academic research.
+Top-tier journals in economics, finance, and accounting (such as AER, JF, TAR, etc.) typically require paid subscriptions to access. However, many universities have limited budgets and haven't purchased access to these journals, creating significant barriers to academic research.
 
 The good news is that most papers published in top journals are uploaded to SSRN (Social Science Research Network) as working papers before formal publication, and these papers are usually available for free download.
 
