@@ -28,7 +28,6 @@ In Chrome browser, click the three-dot menu in the top-right corner, select "Ext
 
 ### Step 2: Enable Developer Mode
 
-
 On the extensions management page, toggle on "Developer mode" in the top-right corner
 ![Step 2](images/step2.png)
 
@@ -45,15 +44,25 @@ After extracting the downloaded zip file, **please select the correct folder**:
 📁 After extraction, you'll typically see a folder (like `ssrn-quick-jump-main`). **You need to open this folder**, find the folder that directly contains `manifest.json`, `content.js`, etc., and select it.
 
 ✅ **The correct folder should directly contain the following files:**
+
 - manifest.json
-- content.js  
+- content.js
 - ssrn-redirect.js
 - icons folder
 - popup.html and other files
 
 ⚠️ **If you see "Manifest file is missing or unreadable"**: This means you've selected the wrong folder level. You need to go one level deeper to find the folder that actually contains these files.
 
-## Features
+### Install on Microsoft Edge
+
+You can install this extension in Edge the same way:
+
+1. Open `extensions`
+2. Turn on **Developer mode** (left sidebar)
+3. Click **Load unpacked**
+4. Select the folder that directly contains `manifest.json`
+
+If Edge shows "Manifest file is missing or unreadable", you selected the wrong folder level. Go one level deeper and select the inner project folder.
 
 ## Features
 
@@ -76,6 +85,7 @@ After installing the extension:
 This extension supports most academic journal websites, including but not limited to:
 
 **Top 5 Economics Journals:**
+
 - American Economic Review (AER)
 - Econometrica
 - Journal of Political Economy (JPE)
@@ -83,16 +93,19 @@ This extension supports most academic journal websites, including but not limite
 - Review of Economic Studies (RES)
 
 **Top Finance Journals:**
+
 - Journal of Finance (JF)
 - Journal of Financial Economics (JFE)
 - Review of Financial Studies (RFS)
 
 **Top Accounting Journals:**
+
 - The Accounting Review (TAR)
 - Journal of Accounting Research (JAR)
 - Journal of Accounting and Economics (JAE)
 
 **Others:**
+
 - Other academic websites using common title selectors
 
 ## Technical Implementation
@@ -134,6 +147,7 @@ SSRN-plugin/
 ## Changelog
 
 ### v0.1.0
+
 - Initial release
 - Support for automatically adding SSRN links
 - Implemented intelligent matching and automatic redirection

@@ -23,7 +23,11 @@
         "https://papers.ssrn.com/searchresults.cfm*",
         "https://ssrn.com/searchresults.cfm*",
         "https://papers.ssrn.com/sol3/results.cfm*",
-        "https://ssrn.com/sol3/results.cfm*"
+        "https://ssrn.com/sol3/results.cfm*",
+        "https://papers.ssrn.com/sol3/DisplayAbstractSearch.cfm*",
+        "https://ssrn.com/sol3/DisplayAbstractSearch.cfm*",
+        "https://papers.ssrn.com/DisplayAbstractSearch.cfm*",
+        "https://ssrn.com/DisplayAbstractSearch.cfm*"
       ],
       "js": [
         "ssrn-redirect.js"

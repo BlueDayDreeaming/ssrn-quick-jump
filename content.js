@@ -192,8 +192,7 @@ function injectIcon(node) {
 
 function buildSearchUrl(title) {
   const primaryQuery = buildSearchQuery(title);
-  const queryParam = encodeURIComponent(primaryQuery);
-  return `https://papers.ssrn.com/searchresults.cfm?term=${queryParam}`;
+  return `https://papers.ssrn.com/searchresults.cfm?term=${encodeURIComponent(primaryQuery)}`;
 }
 
 function buildSearchQuery(title) {
